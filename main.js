@@ -119,3 +119,47 @@ console.log(syntax(`f = n + (n - 1) + (n^2)`));
  *    while stack.length
  *
  */
+/**
+ * 5. Sort stack
+Write a program to sort a stack such that the smallest items are on the top (in ascending order). You can use an additional stack, but you may not use any other data structure (such as an array, or linked list).
+ */
+
+/**
+ * Stacks A and B
+ * A - [1, ,  ]
+ * B - [2, 3]
+ * let current 4
+ *
+ * 1. Grab A
+ * 2. If B is empty or current is greater than B, put on B
+ * 3. If current is smaller than B, pop from B and put on A
+ *   - put current on B
+ * 4. If a is empty quit
+ */
+const sortStack = (stack) => {
+	const A = stack;
+	const B = new Stack();
+
+	while (A.top) {
+		let current = A.pop();
+		console.log(current);
+		while (B.top && B.top.data <= current) {
+			A.push(B.pop());
+		}
+		B.push(current);
+	}
+
+	return B;
+};
+const unsortedStack = () => {
+	const uStack = new Stack();
+	uStack.push(1); // 1, 4, 3, 2
+	uStack.push(4);
+	uStack.push(3);
+	uStack.push(2);
+	return uStack;
+};
+
+console.log(' ');
+console.log('Sort Stack');
+console.log(sortStack(unsortedStack())); // 1, 2, 3 ,4

@@ -1,10 +1,12 @@
 class _Node {
-	constructor(value) {
+	constructor(value, next, prev) {
 		this.value = value;
+		this.next = next;
+		this.prev = prev;
 	}
 }
 
-class Queue {
+class QueueDLL {
 	constructor() {
 		this.first = null;
 		this.last = null;
@@ -14,11 +16,16 @@ class Queue {
 
 		if (!this.first) {
 			this.first = node;
+			this.last = node;
+			node.next = null;
 		}
 		if (this.last) {
 			this.last.next = node;
+			node.prev = this.last;
+			this.last = node;
 		}
-		this.last = node;
+		this.first.prev = null;
+		this.last.next = null;
 	}
 	dequeue() {
 		if (!this.first) return;
@@ -43,24 +50,24 @@ const isEmpty = (queue) => {
 	return queue.first ? false : true;
 };
 const display = (queue) => {
-	console.log(JSON.stringify(queue));
+	console.log(queue);
 };
-const starTrekQ = new Queue();
+const starTrekQ = new QueueDLL();
 starTrekQ.enqueue('Kirk');
-starTrekQ.enqueue('Spook');
+starTrekQ.enqueue('Spock');
 starTrekQ.enqueue('Uhura');
 starTrekQ.enqueue('Sulu');
 starTrekQ.enqueue('Checkov');
 console.log(peek(starTrekQ));
-console.log(' ');
-console.log(`Is Empty: `);
-console.log(isEmpty(starTrekQ));
-console.log(' ');
+// console.log(' ');
+// console.log(`Is Empty: `);
+// console.log(isEmpty(starTrekQ));
+// console.log(' ');
 display(starTrekQ);
 console.log(' ');
-console.log(`Serving Kirk and Spock`);
-console.log(' ');
-starTrekQ.dequeue();
-starTrekQ.dequeue();
-display(starTrekQ);
-module.exports = Queue;
+// console.log(`Serving Kirk and Spock`);
+// console.log(' ');
+// starTrekQ.dequeue();
+// starTrekQ.dequeue();
+// display(starTrekQ);
+module.exports = QueueDLL;
