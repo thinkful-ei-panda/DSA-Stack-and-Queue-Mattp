@@ -13,12 +13,14 @@ class Queue {
 		const node = new _Node(data);
 
 		if (!this.first) {
+			node.next = this.first;
 			this.first = node;
+			this.last = node;
 		}
 		if (this.last) {
 			this.last.next = node;
+			this.last = node;
 		}
-		this.last = node;
 	}
 	dequeue() {
 		if (!this.first) return;
